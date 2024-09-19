@@ -1,0 +1,47 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'chatbot/css/style.css' %}">
+</head>
+<body>
+  <div class="w-75 container m-auto">
+    <header class="py-4">
+      <h2>{{ title }}</h2>
+    </header>
+
+    <main class="p-4 border border-primary">
+      <article class="chat-log log-window">
+        <!-- ここにメッセージを表示 -->
+      </article>
+
+      <!-- 入力フォーム -->
+      <form action="{% url 'bot_response' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+          <button class="btn btn-success" type="submit">送信</button>
+          <input type="text" name="input_text" class="input_text form-control"
+            placeholder="入力" aria-describedby="basic-addon1">
+        </div>
+      </form>
+
+      <!-- jQuery -->
+      <script>
+      </script>
+
+    </main>
+
+    <footer class="p-4 text-center">
+      <a href="{% url 'index' %}" class="btn btn-info">リセット</a>
+    </footer>
+  </div>
+{% bootstrap_javascript %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="{% static 'chatbot/js/script.js' %}"></script>
+</body>
+</html>
